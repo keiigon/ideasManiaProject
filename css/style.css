@@ -1,0 +1,119 @@
+﻿/* latin */
+@font-face {
+  font-family: 'Droid Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(fonts/DroidSans.ttf);
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+/* latin */
+@font-face {
+  font-family: 'Droid Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(fonts/DroidSans-Bold.ttf);
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+/* latin */
+@font-face {
+  font-family: 'Boogaloo';
+  font-style: normal;
+  font-weight: 400;
+  src: url(fonts/Boogaloo-Regular.otf);
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+body {
+	font-family: 'Droid Sans';
+	font-size: 12px;
+	color: #666;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Boogaloo" !important;
+	font-weight: normal !important;
+	color: #666;
+	margin: 0;
+	padding: 0;
+}
+
+.navbar-inverse{
+    background-color: #fff;
+    border-color: #000000;
+}
+
+.navbar {
+    border:none;
+}
+
+.navbar-nav {
+    float:right;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus{
+    color:#89c236;
+    background-color:white;
+    border-top:solid 4px #89c236;
+}
+
+.navbar .nav > li > a {
+    color: #666;
+    border-top: 4px solid #fff;
+    text-shadow: none;
+    font-size: 16px;
+    padding: 20px;
+}
+
+.navbar .nav > li > a:focus,
+.navbar .nav > li > a:hover {
+    border-top: 4px solid #89c236;
+  	color: #fff;
+    background-color: #89c236
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus{
+    border-top: 4px solid #89c236;
+  	color: #fff;
+    background-color: #89c236
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    color: #fff;
+    text-decoration: none;
+    background-color: #89c236;
+}
+
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus{
+    background-color:#fff;
+}
+
+.navbar-inverse .navbar-toggle{
+    border-color: #89c236;
+    background-color: #89c236
+}
+
+.navbar-inverse .navbar-toggle .icon-bar:hover{
+    border-color: #fff;
+    background-color:#fff
+}
+
+.header{
+    background: url("../img/header.jpg") repeat;
+    padding:10px 0;
+    border-bottom:5px solid #f6f6f6 !important;
+    border-top: 5px solid #f6f6f6 !important;
+}
+
+.header h1{
+    color:#fff;
+    font-size:90px;
+    text-align:center;
+    padding:30px 0;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+.header img{
+    width:100%;
+    height: 100%;
+}
