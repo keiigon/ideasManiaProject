@@ -24,6 +24,11 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 
+ @font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(fonts/glyphicons-halflings-regular.ttf);
+}
+
 body {
 	font-family: 'Droid Sans';
 	font-size: 15px;
@@ -300,4 +305,34 @@ h1, h2, h3, h4, h5, h6 {
 
 .footer-inner{
      border-top: 5px solid #89c236 !important;
+}
+
+.page-title {
+    background: url(../img/bg-grey2.png);
+    display: block;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 20;
+    border-bottom: 5px solid #f6f6f6;
+}
+
+.page-title-inner {
+    background: rgba(153,204,102, 0.9);
+    -webkit-box-shadow: inset 0px 0px 5px rgba(0,0,0,.25);
+    -moz-box-shadow: inset 0px 0px 5px rgba(0,0,0,.25);
+    box-shadow: inset 0px 0px 5px rgba(0,0,0,.25);
+    padding: 10px;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+    width: 940px;
+}
+
+.page-header-title{
+    color:white;
 }
