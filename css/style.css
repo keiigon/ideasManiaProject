@@ -85,7 +85,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus{
-    background-color:#fff;
+    background-color:#f4aa42;
+    border-color:#f4aa42;
 }
 
 .navbar-inverse .navbar-toggle{
@@ -95,7 +96,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-inverse .navbar-toggle .icon-bar:hover{
     border-color: #fff;
-    background-color:#fff
+    background-color:#fff;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{
+    border:none;
 }
 
 .header{
@@ -103,6 +108,7 @@ h1, h2, h3, h4, h5, h6 {
     padding:10px 0;
     border-bottom:5px solid #f6f6f6 !important;
     border-top: 5px solid #f6f6f6 !important;
+    margin-bottom:20px;
 }
 
 .header h1{
@@ -119,7 +125,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .post-idea {
-    background: #fff url(../img/bg-k10.png);
+    background: #fff url(../img/squares.png);
     border-left: 4px solid #89c236;
     padding: 13px 13px 13px 15px;
     font-style: italic;
@@ -161,6 +167,37 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 15px !important;
 }
 
+.idea-post{
+    border-left: 4px solid #89c236;
+    padding-left:20px;
+}
+
+.idea-title a{
+    color:#f4aa42;
+}
+
+.progress-box h4 a{
+    color:gray;
+}
+
+.progress-box h4 a:hover{
+    color:#f4aa42;
+}
+
+.idea-post-meta{
+    color:#999;
+    font-family:"Boogaloo"
+}
+
+.divider {
+  height: 1px;
+  width:100%;
+  display:block; /* for use on default inline elements like span */
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+
 .social-grid {
     margin: 0px 0 0 0;
     padding: 0;
@@ -188,7 +225,7 @@ h1, h2, h3, h4, h5, h6 {
     cursor: default;
 }
 
-.social-info > div {
+.social-info > div, .social-info > div:hover {
     display: block;
     position: absolute;
     width: 100%;
@@ -209,6 +246,52 @@ h1, h2, h3, h4, h5, h6 {
 
 .social-facebook {
     background: #f6f6f6 url(../img/facebook_grey.png) no-repeat;
+}
+
+.social-facebook:hover{
+    background: #3b5998 url(../img/facebook_white.png) no-repeat;
+    cursor:pointer;
+
+}
+
+.social-twitter:hover {
+    background: #48c4d2 url(../img/twitter_white.png) no-repeat;
+    cursor:pointer;
+}
+
+.progress-box{
+    margin-top:20px;
+}
+
+.progress {
+    margin-top:3px;
+}
+
+.progress-bar {
+    height: 23px;
+    position: relative;
+    background: #89c236;
+}
+
+.meter > span {
+    display: block;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar h5 {
+    margin-top: 15px;
+}
+
+.btn-success{
+    background-color:#89c236;
+    border-color:#89c236;
+}
+
+.btn-success:hover{
+    background-color:#f4aa42;
+    border-color:#f4aa42;
 }
 
 .footer{
