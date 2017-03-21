@@ -10,9 +10,10 @@
 
     <title>Ideas Mania - Ideas</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
     <link href="css/star-rating.min.css" rel="stylesheet" />
-    
+    <link href="css/style.css" rel="stylesheet" />
+
+
 </head>
 <body>
     <!-- Navigation and Logo -->
@@ -89,9 +90,11 @@
                     </p>
                 </div>
                 <div class="divider"></div>
+                <div>
+                    <h3>Rate this idea:</h3>
 
-                <input id="input-id" type="number" class="rating">
-
+                    <input id="input-id" type="number" class="rating">
+                </div>
                 <div class="divider"></div>
 
                 <div class="title">
@@ -106,7 +109,7 @@
                         <div style="text-align:right">
                             <button class="btn btn-success">Comment</button>
                         </div>
-                       
+
                     </div>
                 </div>
                 <div class="divider"></div>
@@ -202,16 +205,17 @@
         $(document).ready(function () {
             $("#input-id").rating(
                 {
-                    step:0.5,
+                    step: 0.5,
                     showClear: false,
-                    showCaption: false
+                    showCaption: false,
+                    size: "xl"
                 });
 
             $('#input-id').on('rating.change', function (event, value, caption) {
                 console.log(value);
             });
         });
-        
+
     </script>
 </body>
 </html>
