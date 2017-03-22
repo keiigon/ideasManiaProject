@@ -38,6 +38,14 @@
                             <li><a href="ideas.html">Ideas</a></li>
                             <li><a href="addIdea.html">Add Idea</a></li>
                             <li><a href="about.html">About</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">UserName<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="profile.html">My Profile</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Logout</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -53,7 +61,7 @@
             <!-- start: Container -->
             <div class="container">
 
-                <h1 class="page-header-title">Register</h1>
+                <h1 class="page-header-title">Registeration</h1>
 
             </div>
             <!-- end: Container  -->
@@ -66,25 +74,74 @@
         <div class="row">
             <div class="col-md-8">
                 <div>
-                    <form>
-                        <label class="control-label">First Name:</label>
-                        <input class="form-control" type="text" name="firstname" />
-                        <label class="control-label">Last Name:</label>
-                        <input class="form-control" type="text" name="lastname" />
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="firstName" class="col-sm-3 control-label">First Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="firstName" name="firstName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="col-sm-3 control-label">Last Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="lastName" name="lastName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-3 control-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="email" name="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="country" class="col-sm-3 control-label">Country</label>
+                            <div class="col-sm-9">
+                                <select id="country" name="country" class="form-control">
+                                    <option value="">Select Country</option>
+                                    <option value="1">Egypt</option>
+                                    <option value="2">Saudi Arabia</option>
+                                    <option value="3">Qatar</option>
+                                    <option value="4">Kuwait</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender" class="col-sm-3 control-label">Gender</label>
+                            <div class="col-sm-9">
+                                <input type="radio" name="gender" value="Male" checked>Male
+                                <input type="radio" name="gender" value="Female">Female
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="col-sm-3 control-label">Username</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="username" name="username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-3 control-label">Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="password" name="password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="profilePhoto" class="col-sm-3 control-label">Photo</label>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control" id="profilePhoto" name="profilePhoto">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <button type="reset" class="btn btn-default">Clear</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
 
 
             </div>
             <div class="col-md-4">
-                <div>
-                    <a style="width:100%" href="login.html" class="btn btn-success btn-lg">Login</a>
-                </div>
-                <br />
-                <div>
-                    <a style="width:100%" href="register.html" class="btn btn-success btn-lg">Sign in</a>
-                </div>
-                <br />
                 <div>
                     <div class="title">
                         <h2>Idea of the month</h2>
