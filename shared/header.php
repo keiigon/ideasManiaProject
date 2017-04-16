@@ -15,6 +15,9 @@
     <link href="css/star-rating.min.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
     <link href="plugins/dist/summernote.css" rel="stylesheet" />
+    
+    <script src="js/jquery-3.2.0.min.js"></script>
+    <script src="js/bootstrap.js"></script>
 </head>
 
 <body>
@@ -37,7 +40,7 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.php">Home</a></li>
+                            <li><a href="index.php">Home</a></li>
                             <li><a href="ideas.php">Ideas</a></li>
                             <li><a href="addIdea.php">Add Idea</a></li>
                             <li><a href="about.php">About</a></li>
@@ -60,4 +63,8 @@
 
         </div>
     </div>
+    <script>
+        var pageName = location.pathname.split('/')[2];
+        $('a[href="' + pageName + '"]').parent().addClass("active");
+    </script>
     <!-- End Navigation and Logo -->
