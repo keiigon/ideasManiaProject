@@ -95,34 +95,8 @@
         </div>
         <!-- End Content -->
         <br />
-        <!-- End Footer -->
-        <footer class="footer">
-            <div class="footer-inner">
-                <p class="pull-right"><a href="#">Back to top</a></p>
-                <p>&copy; 2017 ideasmania.com</p>
-            </div>
-
-        </footer>
-        <!-- End Footer -->
+        <?php include("shared/footer.php") ?>
     </div>
-    <script src="js/jquery-3.2.0.min.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/star-rating.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#input-id").rating(
-                {
-                    step: 0.5,
-                    showClear: false,
-                    showCaption: false,
-                    size: "xl"
-                });
 
-            $('#input-id').on('rating.change', function (event, value, caption) {
-                console.log(value);
-            });
-        });
-
-    </script>
 </body>
 </html>

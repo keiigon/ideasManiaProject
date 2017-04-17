@@ -1,4 +1,10 @@
 <?php include("shared/header.php") ?>
+<?php include("shared/functions.php"); ?>
+<?php
+    if(isset($_SESSION["userId"])){
+        header("refresh:0;index.php");
+    }
+?>
     <div class="page-title">
 
         <div class="page-title-inner">
@@ -19,7 +25,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div>
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" method="post" action="afterRegister.php" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="firstName" class="col-sm-3 control-label">First Name</label>
                             <div class="col-sm-9">
@@ -43,18 +49,21 @@
                             <div class="col-sm-9">
                                 <select id="country" name="country" class="form-control">
                                     <option value="">Select Country</option>
-                                    <option value="1">Egypt</option>
-                                    <option value="2">Saudi Arabia</option>
-                                    <option value="3">Qatar</option>
-                                    <option value="4">Kuwait</option>
+                                    <?php
+                                        $countries = GetCountries();
+                                    
+                                        foreach($countries as $c){
+                                            echo "<option value=" . $c->id . ">" . $c->title . "</option>";
+                                        }
+                                    ?>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="gender" class="col-sm-3 control-label">Gender</label>
                             <div class="col-sm-9">
-                                <input type="radio" name="gender" value="Male" checked>Male
-                                <input type="radio" name="gender" value="Female">Female
+                                <input type="radio" name="gender" value="1" checked>Male
+                                <input type="radio" name="gender" value="2">Female
                             </div>
                         </div>
                         <div class="form-group">
@@ -92,17 +101,7 @@
         </div>
         <!-- End Content -->
         <br />
-        <!-- End Footer -->
-        <footer class="footer">
-            <div class="footer-inner">
-                <p class="pull-right"><a href="#">Back to top</a></p>
-                <p>&copy; 2017 ideasmania.com</p>
-            </div>
-
-        </footer>
-        <!-- End Footer -->
+        <?php include("shared/footer.php") ?>
     </div>
-    <script src="js/jquery-3.2.0.min.js"></script>
-    <script src="js/bootstrap.js"></script>
 </body>
 </html>

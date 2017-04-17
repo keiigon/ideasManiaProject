@@ -18,6 +18,7 @@
     
     <script src="js/jquery-3.2.0.min.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="js/script.js"></script>
 </head>
 
 <body>
@@ -42,15 +43,20 @@
                         <ul class="nav navbar-nav">
                             <li><a href="index.php">Home</a></li>
                             <li><a href="ideas.php">Ideas</a></li>
-                            <li><a href="addIdea.php">Add Idea</a></li>
+                            <?php
+                                if(isset($_SESSION["userId"])){
+                            ?>
+                                <li><a href="addIdea.php">Add Idea</a></li>
+                            <?php } ?>
+                            
                             <li><a href="about.php">About</a></li>
                             <?php
                                 if(isset($_SESSION["userId"])){
                             ?>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION["username"]; $username = $_SESSION["userId"]; ?><span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION["username"]; $userId = $_SESSION["userId"]; ?><span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href='<?php echo "profile.php?id=$username" ?>'>My Profile</a></li>
+                                    <li><a href="profile.php">My Profile</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="logout.php">Logout</a></li>
                                 </ul>
@@ -63,8 +69,4 @@
 
         </div>
     </div>
-    <script>
-        var pageName = location.pathname.split('/')[2];
-        $('a[href="' + pageName + '"]').parent().addClass("active");
-    </script>
     <!-- End Navigation and Logo -->

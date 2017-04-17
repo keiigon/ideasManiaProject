@@ -43,8 +43,8 @@
                  ?>
                         <div class="idea-post">
                             <h2 class="idea-title"><a href='<?php echo "singleIdea.php?id=" . $row->ideaId ?>'><?php echo $row->title ?></a></h2>
-                            <p class="idea-post-meta"><?php echo $row->postDate ?> by <?php echo $row->username ?></p>
-
+                            <p class="idea-post-meta">
+                                <?php echo date("d-m-Y", strtotime($row->postDate)); ?> by <?php echo $row->username; ?></p>
                             <p>
                                 <?php echo $row->description ?>
                             </p>
@@ -64,22 +64,14 @@
                 </p>
             </div>
             <div class="col-md-3">
-                <a href="addIdea.html" class="light-bulb"></a>
+                <a href="addIdea.php" class="light-bulb"></a>
             </div>
 
 
         </div>
         <!-- End Content -->
     <br />
-        <!-- End Footer -->
-        <footer class="footer">
-            <div class="footer-inner">
-                <p class="pull-right"><a href="#">Back to top</a></p>
-                <p>&copy; 2017 ideasmania.com</p>
-            </div>
-
-        </footer>
-        <!-- End Footer -->
+        <?php include("shared/footer.php") ?>
     </div>
     
 </body>

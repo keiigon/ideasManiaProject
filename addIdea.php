@@ -1,4 +1,12 @@
 <?php include("shared/header.php") ?>
+<?php include("shared/functions.php") ?>
+<?php
+    if(!isset($_SESSION["userId"])){
+        header("refresh:0;index.php");
+    }
+
+    $categoryList = GetCategories();
+?>
     <div class="page-title">
 
         <div class="page-title-inner">
@@ -37,10 +45,11 @@
                             <div class="col-sm-9">
                                 <select id="category" name="category" class="form-control">
                                     <option value="">Select Category</option>
-                                    <option value="1">Art</option>
-                                    <option value="2">Food</option>
-                                    <option value="3">Engineering</option>
-                                    <option value="4">Computers</option>
+                                    <?php
+                                        foreach($categoryList as $c){
+                                            echo "<option value=". $c->id . ">" . $c->title . "</option>";
+                                        }
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -68,18 +77,8 @@
         </div>
         <!-- End Content -->
         <br />
-        <!-- End Footer -->
-        <footer class="footer">
-            <div class="footer-inner">
-                <p class="pull-right"><a href="#">Back to top</a></p>
-                <p>&copy; 2017 ideasmania.com</p>
-            </div>
-
-        </footer>
-        <!-- End Footer -->
+        <?php include("shared/footer.php") ?>
     </div>
-    <script src="js/jquery-3.2.0.min.js"></script>
-    <script src="js/bootstrap.js"></script>
     <script src="plugins/dist/summernote.min.js"></script>
     <script>
         $(document).ready(function () {

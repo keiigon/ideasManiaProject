@@ -28,7 +28,7 @@
         <?php
     
             $form = '<form class="form-signin" method="post" action="login.php">
-                     <h2 class="form-signin-heading">Please sign in</h2>
+                     <h2 class="form-signin-heading">Login</h2>
                      <br />
                      <label for="inputEmail" class="sr-only">Email address</label>
                      <input type="text" name="username" class="form-control" autofocus="">
@@ -84,7 +84,5 @@
         <br />
         
     </div>
-    <script src="js/jquery-3.2.0.min.js"></script>
-    <script src="js/bootstrap.js"></script>
 </body>
 </html>
