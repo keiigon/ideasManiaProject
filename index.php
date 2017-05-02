@@ -8,6 +8,12 @@
         $_SESSION["userId"] = $userArray[0];
         header("refresh:0;index.php");
     }
+
+    $targetPage = "login.php";
+
+    if(isset($_SESSION['userId'])){
+        $targetPage = "addIdea.php";
+    }
 ?>
     <!-- Banner -->
     <div class="header">
@@ -64,7 +70,7 @@
                 </p>
             </div>
             <div class="col-md-3">
-                <a href="addIdea.php" class="light-bulb"></a>
+                <a href="<?php echo $targetPage; ?>" class="light-bulb"></a>
             </div>
 
 

@@ -18,6 +18,7 @@
     
     <script src="js/jquery-3.2.0.min.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="js/star-rating.min.js"></script>
     <script src="js/script.js"></script>
 </head>
 

@@ -2,7 +2,7 @@
 <?php include("shared/functions.php") ?>
 <?php
     if(!isset($_SESSION["userId"])){
-        header("refresh:0;index.php");
+        header("refresh:0;login.php");
     }
 
     $categoryList = GetCategories();
@@ -27,7 +27,10 @@
         <div class="row">
             <div class="col-md-8">
                 <div>
-                    <form class="form-horizontal" role="form">
+                    <?php 
+                        if(!isset($_POST['title'])){
+                    ?>
+                    <form class="form-horizontal" role="form" method="post" action="addIdea.php">
                         <div class="form-group">
                             <label for="title" class="col-sm-3 control-label">Title</label>
                             <div class="col-sm-9">
@@ -54,6 +57,7 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <input type="hidden" value="" name="content" id="content" />
                             <label for="content" class="col-sm-3 control-label">Content</label>
                             <div class="col-sm-9">
                                 <div id="summernote"><p>Hello Summernote</p></div>
@@ -63,10 +67,26 @@
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
                                 <button type="submit" class="btn btn-success">Save</button>
-                                <button type="reset" class="btn btn-default">Clear</button>
+                                <button type="reset" class="btn btn-default" onclick="resetContent()">Clear</button>
                             </div>
                         </div>
                     </form>
+                    <?php
+                        }
+                        else{
+                            $result = AddNewIdea($_POST["title"], $_POST["description"], $_POST["category"], $_POST["content"], $_SESSION["userId"]);
+                            
+                            if($result == 1){
+                                echo "<h2 style='color:green; text-align: center;'>Idea saved successfully</h2>";
+                                header("refresh:3;profile.php");
+                            }
+                            else{
+                                echo "<h2 style='color: red; ; text-align: center;'>something wrong has happened, please try again</h2>";
+                            }
+                            
+                        }
+                    ?>
+                    
                 </div>
 
 
@@ -87,13 +107,17 @@
                     height: 300,                 // set editor height
                     minHeight: null,             // set minimum height of editor
                     maxHeight: null,             // set maximum height of editor
-                });
-
-            var markupStr = $('#summernote').summernote('code');
-
-            var markupStr = 'hello world';
-            $('#summernote').summernote('code', markupStr);
+                    callbacks: {
+                        onChange: function(contents, $editable){                       
+                            $('#content').val(contents).trigger("change");
+                        }
+                    }
+                });           
         });
+        
+        function resetContent(){
+            $('#summernote').summernote('code', "");
+        }
     </script>
 </body>
 </html>

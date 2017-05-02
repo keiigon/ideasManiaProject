@@ -41,6 +41,8 @@
                      </label>
                      </div>
                      <button class="btn btn-lg btn-success btn-block" type="submit">Login</button>
+                     <br/>
+                     <h4>You do not have an account <a href="register.php">Register</a></h4>
                      </form>';
 
             if(isset($_POST["username"])){

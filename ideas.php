@@ -1,4 +1,16 @@
 <?php include("shared/header.php") ?>
+<?php include("shared/functions.php") ?>
+<?php
+    $categoryList = GetCategories();
+
+    $catId = 0;
+
+    if(isset($_GET["catId"]) && !empty($_GET["catId"])){
+        $catId = $_GET["catId"];
+    }
+
+    $ideasList = GetIdeasByCategory($catId);
+?>
     <div class="page-title">
 
         <div class="page-title-inner">
@@ -19,7 +31,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div>
-                    <form method="post" action="">
+                    <form method="get" action="ideas.php">
 
                         <fieldset>
                             <div class="clearfix">
@@ -28,12 +40,13 @@
                                         <span>Category:</span>
                                     </div>
                                     <div class="col-lg-5">
-                                        <select class="form-control" name="category">
-                                            <option value="1">Food</option>
-                                            <option value="2">Art</option>
-                                            <option value="3">Engineering</option>
-                                            <option value="4">Act</option>
-                                            <option value="5">Medicine</option>
+                                        <select id="category" name="catId" class="form-control">
+                                            <option value="">Select Category</option>
+                                            <?php
+                                                foreach($categoryList as $c){
+                                                    echo "<option value=". $c->id . ">" . $c->title . "</option>";
+                                                }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
@@ -53,42 +66,20 @@
                     </form>
                 </div>
                 <br />
+                <?php
+                    foreach($ideasList as $idea){
+                ?>
                 <div class="idea-post">
-                    <h2 class="idea-title"><a href="singleIdea.html"> the great idea of All Time</a></h2>
-                    <p class="idea-post-meta">21/3/2017 - by Tarek - Art</p>
+                    <h2 class="idea-title"><a href="singleIdea.php?id=<?php echo $idea->ideaId ?>"><?php echo $idea->title ?></a></h2>
+                    <p class="idea-post-meta">
+                        <?php echo date("d-m-Y", strtotime($idea->postDate)) . " by " . $idea->username . " - " . $idea->category; ?>
+                    </p>
                 </div>
                 <div class="divider"></div>
-                <div class="idea-post">
-                    <h2 class="idea-title"><a href="singleIdea.html"> the great idea of All Time</a></h2>
-                    <p class="idea-post-meta">21/3/2017 - by Tarek - Art</p>
-                </div>
-                <div class="divider"></div>
-                <div class="idea-post">
-                    <h2 class="idea-title"><a href="singleIdea.html"> the great idea of All Time</a></h2>
-                    <p class="idea-post-meta">21/3/2017 - by Tarek - Art</p>
-                </div>
-                <div class="divider"></div>
-                <div class="idea-post">
-                    <h2 class="idea-title"><a href="singleIdea.html"> the great idea of All Time</a></h2>
-                    <p class="idea-post-meta">21/3/2017 - by Tarek - Art</p>
-                </div>
-                <div class="divider"></div>
-                <div class="idea-post">
-                    <h2 class="idea-title"><a href="singleIdea.html"> the great idea of All Time</a></h2>
-                    <p class="idea-post-meta">21/3/2017 - by Tarek - Art</p>
-                </div>
-                <div class="divider"></div>
-                <div class="idea-post">
-                    <h2 class="idea-title"><a href="singleIdea.html"> the great idea of All Time</a></h2>
-                    <p class="idea-post-meta">21/3/2017 - by Tarek - Art</p>
-                </div>
-                <div class="divider"></div>
-                <div class="idea-post">
-                    <h2 class="idea-title"><a href="singleIdea.html"> the great idea of All Time</a></h2>
-                    <p class="idea-post-meta">21/3/2017 - by Tarek - Art</p>
-                </div>
-
-
+                <?php
+                    }
+                ?>
+                
             </div>
             <div class="col-md-4">
                 <?php include("shared/side.php") ?>
