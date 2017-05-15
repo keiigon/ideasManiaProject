@@ -415,3 +415,21 @@ h1, h2, h3, h4, h5, h6 {
 .panel-info {
     border-color: #ffb311;
 }
+
+.ui-dialog-osx {
+    -moz-border-radius: 0 0 8px 8px;
+    -webkit-border-radius: 0 0 8px 8px;
+    border-radius: 0 0 8px 8px;
+    border-width: 0 8px 8px 8px;
+}
+.navbar-static-top{
+    z-index: 100;
+}
+
+.btn_delete{
+    cursor: pointer;
+}
+
+.field-error{
+    border: solid 2px red;
+}

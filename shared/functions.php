@@ -62,8 +62,8 @@ function GetCountries(){
     return $countryList;
 }
 
-function CheckUser($email, $username){
-    $query = "select User_Id from users where Email = '$email' or Username = '$username'";
+function CheckUser($email, $username, $userId){
+    $query = "select User_Id from users where (Email = '$email' or Username = '$username') and User_Id != $userId";
     
     $result = RunQuery($query);
     
@@ -106,6 +106,14 @@ function GetUserProfile($userId){
     $user->photo = $row["PhotoPath"];
     
     return $user;
+}
+
+function UpdateUserProfile($firstname, $lastname, $username, $password, $email, $gender, $country, $photo, $userId){
+    $query = "update users set FirstName = '$firstname', LastName = '$lastname', Username = '$username', Password = '$password', Email = '$email', Gender = $gender, Country_Id = $country, PhotoPath = '$photo' where User_Id = $userId";
+    
+    $result = RunQuery($query);
+    
+    return $result;
 }
 
 function GetUserIdeas($userId){
@@ -192,7 +200,7 @@ function GetIdeasByCategory($categoryId){
 }
 
 function GetIdeaById($ideaId){
-    $query = "select i.Idea_Id, i.Title, i.Description, i.Date, i.Content, u.Username, c.Title as categoryTitle from ideas as i 
+    $query = "select i.Idea_Id, i.Title, i.Description, i.Date, i.Content, i.Category_Id as catId, i.User_Id as userId, u.Username, c.Title as categoryTitle from ideas as i 
               inner join users as u 
               on i.User_Id = u.User_Id
               inner join category c
@@ -210,6 +218,8 @@ function GetIdeaById($ideaId){
     $idea->postDate = $row["Date"];
     $idea->username = $row["Username"];
     $idea->category = $row["categoryTitle"];
+    $idea->userId = $row["userId"];
+    $idea->categoryId = $row["catId"];
     
     return $idea;
 }
@@ -267,4 +277,14 @@ function CheckUserRating($ideaId, $userId){
     
     return $row["RatingValue"];
 }
+
+function UpdateIdea($title, $description, $categoryId, $content, $ideaId){
+    $query = "update ideas set Title = '$title', Description = '$description', Category_Id = $categoryId, Content = '$content' where Idea_Id = $ideaId";
+    
+    $result = RunQuery($query);
+    
+    return $result;
+}
+
+
 ?>

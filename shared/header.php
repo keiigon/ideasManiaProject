@@ -15,10 +15,14 @@
     <link href="css/star-rating.min.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
     <link href="plugins/dist/summernote.css" rel="stylesheet" />
+    <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="plugins/jquery-ui/jquery-ui.structure.min.css" rel="stylesheet" />
+    <link href="plugins/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" />
     
     <script src="js/jquery-3.2.0.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/star-rating.min.js"></script>
+    <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
     <script src="js/script.js"></script>
 </head>
 

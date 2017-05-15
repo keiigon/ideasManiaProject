@@ -7,6 +7,7 @@
     }else{
         $user = (object)array();
         $user->firstname = "";
+        $user->password = "";
         $user->lastname = "";
         $user->username = "";
         $user->email = "";
@@ -36,7 +37,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div>
-                    <form class="form-horizontal" role="form" method="post" action="<?php echo $action; ?>" enctype="multipart/form-data">
+                    <form onsubmit="return validateForm()" class="form-horizontal" role="form" method="post" action="<?php echo $action; ?>" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="firstName" class="col-sm-3 control-label">First Name</label>
                             <div class="col-sm-9">
@@ -104,7 +105,7 @@
                             <label for="password" class="col-sm-3 control-label">Password</label>
                             <div class="col-sm-9">
                                 <input type="password" class="form-control" id="password" name="password">
-                                <input type="hidden" name="oldPassword" value="<?php echo $user->password; ?>">
+                                <input type="hidden" name="oldPassword" id="oldPassword" value="<?php echo $user->password; ?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -133,5 +134,53 @@
         <br />
         <?php include("shared/footer.php") ?>
     </div>
+    <script>
+        $(document).ready(function(){
+            $("input#firstName").focus(function(){
+                $(this).removeClass("field-error");
+            })
+            .blur(function(){
+                if($(this).val() == ""){
+                    $(this).addClass("field-error");
+                }
+            });
+        });
+        
+        
+        function validateForm(){
+            var firstName = $("input#firstName").val();
+            var email = $("input#email").val();
+            var username = $("input#username").val();
+            var password = $("input#password").val();
+            var oldPassword = $("input#oldPassword").val();
+            var country = $("select#country").val();
+            
+            if(firstName == "" || lastName == "" || email == "" || username == "" || country == "" ||
+               (password == "" && oldPassword == "")){
+                
+                if(firstName == ""){
+                    $("input#firstName").addClass("field-error");
+                }
+                
+                if(email == ""){
+                    $("input#email").addClass("field-error");
+                }
+                
+                if(username == ""){
+                    $("input#username").addClass("field-error");
+                }
+                
+                if(password == ""){
+                    $("input#password").addClass("field-error");
+                }
+            
+                if(country == ""){
+                    $("select#country").addClass("field-error");
+                }
+            
+                return false;
+            }
+        }
+    </script>
 </body>
 </html>

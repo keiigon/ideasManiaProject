@@ -27,7 +27,7 @@
             }
             else{
                 
-                $result = CheckUser($_POST["email"], $_POST["username"]);
+                $result = CheckUser($_POST["email"], $_POST["username"], 0);
                 
                 if(empty($result)){
                     $file = "";

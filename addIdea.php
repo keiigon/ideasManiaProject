@@ -5,6 +5,27 @@
         header("refresh:0;login.php");
     }
 
+    if(isset($_GET["id"]) && !empty($_GET["id"])){
+        $selectedIdea = GetIdeaById($_GET["id"]);
+        
+        if($selectedIdea->userId != $_SESSION["userId"]){
+            header("refresh:0;index.php");
+        }
+        else{
+            $action = "addIdea.php";
+        }
+    }
+    else{
+        $selectedIdea = (object)array();
+        $selectedIdea->ideaId = "";
+        $selectedIdea->title = "";
+        $selectedIdea->description = "";
+        $selectedIdea->content = "";
+        $selectedIdea->userId = "";
+        $selectedIdea->categoryId = "";
+        $action = "addIdea.php";
+    }
+
     $categoryList = GetCategories();
 ?>
     <div class="page-title">
@@ -30,17 +51,20 @@
                     <?php 
                         if(!isset($_POST['title'])){
                     ?>
-                    <form class="form-horizontal" role="form" method="post" action="addIdea.php">
+                    
+                    <form class="form-horizontal" role="form" method="post" action="<?php echo $action; ?>">
+                        <input type="hidden" value="<?php echo $selectedIdea->ideaId; ?>" name="ideaId" id="ideaId" />
                         <div class="form-group">
                             <label for="title" class="col-sm-3 control-label">Title</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="title" name="title">
+                                <input type="text" class="form-control" id="title" name="title"
+                                       value="<?php echo $selectedIdea->title; ?>">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="description" class="col-sm-3 control-label">Description</label>
                             <div class="col-sm-9">
-                                <textarea class="form-control" id="description" name="description" rows="5" cols="10"></textarea>
+                                <textarea class="form-control" id="description" name="description" rows="5" cols="10"><?php echo $selectedIdea->description; ?></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -50,17 +74,21 @@
                                     <option value="">Select Category</option>
                                     <?php
                                         foreach($categoryList as $c){
-                                            echo "<option value=". $c->id . ">" . $c->title . "</option>";
+                                            $selected = "";
+                                            if($c->id == $selectedIdea->categoryId) {
+                                                $selected = " selected='selected'";
+                                            }
+                                            echo "<option value=" . $c->id . $selected . ">" . $c->title . "</option>";
                                         }
                                     ?>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="hidden" value="" name="content" id="content" />
+                            <input type="hidden" value="<?php echo $selectedIdea->content; ?>" name="content" id="content" />
                             <label for="content" class="col-sm-3 control-label">Content</label>
                             <div class="col-sm-9">
-                                <div id="summernote"><p>Hello Summernote</p></div>
+                                <div id="summernote"><?php echo $selectedIdea->content; ?></div>
                             </div>
                         </div>
 
@@ -74,7 +102,13 @@
                     <?php
                         }
                         else{
-                            $result = AddNewIdea($_POST["title"], $_POST["description"], $_POST["category"], $_POST["content"], $_SESSION["userId"]);
+                            if(isset($_POST["ideaId"]) && !empty($_POST["ideaId"])){
+                                $result = UpdateIdea($_POST["title"], $_POST["description"], $_POST["category"], $_POST["content"], $_POST["ideaId"]);
+                            }
+                            else{
+                                $result = AddNewIdea($_POST["title"], $_POST["description"], $_POST["category"], $_POST["content"], $_SESSION["userId"]);
+                            }
+                            
                             
                             if($result == 1){
                                 echo "<h2 style='color:green; text-align: center;'>Idea saved successfully</h2>";

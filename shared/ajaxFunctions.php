@@ -10,6 +10,9 @@
             case "AddRate":
                 AddRate($_POST["ideaId"], $_POST["userId"], $_POST["rate"]);
                 break;
+            case "DeleteIdea":
+            DeleteIdea($_POST["ideaId"]);
+            break;
             default:
         }
     }
@@ -28,6 +31,14 @@ function AddComment($ideaId, $userId, $comment){
 function AddRate($ideaId, $userId, $rate){
     $query = "insert into rating (User_Id, Idea_Id, RatingValue)
               values ($userId, $ideaId, $rate)";
+    
+    $result = RunQuery($query);
+    
+    return $result;
+}
+
+function DeleteIdea($ideaId){
+    $query = "delete from ideas where Idea_Id = $ideaId";
     
     $result = RunQuery($query);
     

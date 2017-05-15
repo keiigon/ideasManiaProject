@@ -61,7 +61,7 @@
                                 <td><?php echo $idea->category; ?></td>
                                 <td></td>
                                 <td><a href="addIdea.php?id=<?php echo $idea->ideaId ?>">Edit</a></td>
-                                <td><a href="#">Delete</a></td>
+                                <td><a class="btn_delete" title="<?php echo $idea->ideaId ?>">Delete</a></td>
                             </tr>
                         <?php
                             }
@@ -135,6 +135,49 @@
         <br />
         <?php include("shared/footer.php") ?>
     </div>
-    
+    <script>
+        
+        $(".btn_delete").click(function(){
+            var id = $(this).attr("title");
+            $('<div></div>').appendTo('body')
+                            .html('<div><h2>Are you shure you want to delete this idea?</h2></div>')
+                            .dialog({
+                                modal: true,
+                                title: 'Confirmation Message',
+                                zIndex: 10000000,
+                                autoOpen: true,
+                                width: 'auto',
+                                resizable: false,
+                                buttons: {
+                                    Yes: function () {
+                                        deleteIdea(id);
+                                        $(this).dialog("close");
+                                    },
+                                    No: function () {
+                                        $(this).dialog("close");
+                                    }
+                                },
+                                close: function (event, ui) {
+                                    $(this).remove();
+                                }
+                            });
+        });
+        
+
+        function deleteIdea(id) {
+            $.ajax({
+                type:"POST",
+                url:"shared/ajaxFunctions.php",
+                data:{
+                    ideaId: id,
+                    action: "DeleteIdea"
+                    },
+                success: function(msg){
+                        location.reload();
+                    }
+                });
+        }
+
+    </script>
 </body>
 </html>
