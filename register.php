@@ -160,6 +160,16 @@
                 if($(this).val() == ""){
                     $(this).addClass("field-error");
                 }
+                else{
+                    if(!validateEmailFormat()){
+                        $("#notValidEmail").show();
+                        $(this).addClass("field-error");
+                    }
+                    else{
+                        $("#notValidEmail").hide();
+                        $(this).removeClass("field-error");
+                    }
+                }
             });
             
             $("input#username").focus(function(){
@@ -190,6 +200,14 @@
             });
         });
         
+        function validateEmailFormat(){
+            var emailRegx = /^([A-Za-z0-9_\-\.])+\@(([A_Za-z0-9\-])+\.)+([A-Za-z0-9]{2,4})$/;
+            
+            var email = $("input#email").val();
+            
+            return emailRegx.test(email);
+        }
+        
         function validateForm(){
             var firstName = $("input#firstName").val();
             var email = $("input#email").val();
@@ -218,7 +236,7 @@
                 if(password == "" && oldPassword == ""){
                     $("input#password").addClass("field-error");
                 }
-            
+             
                 if(country == ""){
                     $("select#country").addClass("field-error");
                 }   
@@ -226,15 +244,11 @@
                 return false;
             }
             
-            var emailRegx = /^([A-Za-z0-9_\-\.])+\@(([A_Za-z0-9\-])+\.)+([A-Za-z0-9]{2,4})$/;
-            
-            if(!emailRegx.test(email)){
-                $("#notValidEmail").show();
+            if(!validateEmailFormat()){
                 return false;
             }
-            else{
-                $("#notValidEmail").hide();
-            }
+            
+            
         }
     </script>
 </body>

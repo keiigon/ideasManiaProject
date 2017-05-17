@@ -52,7 +52,7 @@
                         if(!isset($_POST['title'])){
                     ?>
                     
-                    <form class="form-horizontal" role="form" method="post" action="<?php echo $action; ?>">
+                    <form onsubmit="return validateForm()" class="form-horizontal" role="form" method="post" action="<?php echo $action; ?>">
                         <input type="hidden" value="<?php echo $selectedIdea->ideaId; ?>" name="ideaId" id="ideaId" />
                         <div class="form-group">
                             <label for="title" class="col-sm-3 control-label">Title</label>
@@ -88,7 +88,9 @@
                             <input type="hidden" value="<?php echo $selectedIdea->content; ?>" name="content" id="content" />
                             <label for="content" class="col-sm-3 control-label">Content</label>
                             <div class="col-sm-9">
-                                <div id="summernote"><?php echo $selectedIdea->content; ?></div>
+                                <div id="contentHolder">
+                                    <div id="summernote"><?php echo $selectedIdea->content; ?></div>
+                                </div>
                             </div>
                         </div>
 
@@ -138,20 +140,87 @@
         $(document).ready(function () {
             $('#summernote').summernote(
                 {
-                    height: 300,                 // set editor height
-                    minHeight: null,             // set minimum height of editor
-                    maxHeight: null,             // set maximum height of editor
+                    height: 300,
+                    minHeight: null,
+                    maxHeight: null,
                     callbacks: {
                         onChange: function(contents, $editable){                       
                             $('#content').val(contents).trigger("change");
+                            
+                            if(contents == ""){
+                                $("#contentHolder").addClass("field-error");
+                            }
+                            else{
+                                $("#contentHolder").removeClass("field-error");
+                            }
                         }
                     }
-                });           
+            });
+            
+            $("input#title").focus(function(){
+                $(this).removeClass("field-error");
+            })
+            .blur(function(){
+                if($(this).val() == ""){
+                    $(this).addClass("field-error");
+                }
+            });
+            
+            $("textarea#description").focus(function(){
+                $(this).removeClass("field-error");
+            })
+            .blur(function(){
+                if($(this).val() == ""){
+                    $(this).addClass("field-error");
+                }
+            });
+            
+            $("select#category").focus(function(){
+                $(this).removeClass("field-error");
+            })
+            .blur(function(){
+                if($(this).val() == ""){
+                    $(this).addClass("field-error");
+                }
+            });
+            
+            resetContent();
         });
+        
+        
+        function validateForm(){
+            var title = $("input#title").val();
+            var description = $("textarea#description").val();
+            var category = $("select#category").val();
+            var content = $('#summernote').summernote('code');
+            
+            if(title == "" || description == "" || category == ""){
+                
+                if(title == ""){
+                    $("input#title").addClass("field-error");
+                }
+                
+                if(description == ""){
+                    $("textarea#description").addClass("field-error");
+                }
+                
+                if(category == ""){
+                    $("select#category").addClass("field-error");
+                }  
+                
+                if(content == ""){
+                    $("#contentHolder").addClass("field-error");
+                } 
+                
+                return false;
+            }
+        }
         
         function resetContent(){
             $('#summernote').summernote('code', "");
+            $("#contentHolder").removeClass("field-error");
         }
+        
     </script>
 </body>
 </html>

@@ -92,10 +92,11 @@
                 </div>
                 <?php
                     foreach($commentsList as $c){
+                         $image = empty($c->photo) ? 'img/img_avatar1.png' : $c->photo;
                  ?>
                 <div class="media">
                     <div class="media-left">
-                        <img src="<?php echo $c->photo ?>" class="media-object" style="width:60px">
+                        <img src="<?php echo $image ?>" class="media-object" style="width:60px">
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading"><?php echo $c->username . " | " . date("d-m-Y", strtotime($idea->postDate)); ?></h4>
@@ -141,6 +142,12 @@
                     }
                 });
             });
+            
+            
+             $("textarea#comment").focus(function(){
+                $(this).removeClass("field-error");
+             });
+            
         });
         
         function addComment(){
@@ -149,19 +156,28 @@
             var comment = $('#comment').val();
             var action = "AddComment";
 
-            $.ajax({
-                type:"POST",
-                url:"shared/ajaxFunctions.php",
-                data:{
-                    ideaId: ideaId,
-                    userId: userId,
-                    comment: comment,
-                    action: action
-                },
-                success: function(msg){
-                    location.reload();
-                }
-            })
+            if(comment == ""){
+                $("textarea#comment").addClass("field-error");
+            }
+            else{
+                $("textarea#comment").removeClass("field-error");
+                
+                $.ajax({
+                    type:"POST",
+                    url:"shared/ajaxFunctions.php",
+                    data:{
+                        ideaId: ideaId,
+                        userId: userId,
+                        comment: comment,
+                        action: action
+                    },
+                    success: function(msg){
+                        location.reload();
+                    }
+                });
+            }
+            
+            
         }
     </script>
 </body>

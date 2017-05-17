@@ -27,11 +27,11 @@
         
         <?php
     
-            $form = '<form class="form-signin" method="post" action="login.php">
+            $form = '<form onsubmit="return validateForm()" class="form-signin" method="post" action="login.php">
                      <h2 class="form-signin-heading">Login</h2>
                      <br />
                      <label for="inputEmail" class="sr-only">Email address</label>
-                     <input type="text" name="username" class="form-control" autofocus="">
+                     <input type="text" id="username" name="username" class="form-control" autofocus="">
                      <br />
                      <label for="inputPassword" class="sr-only">Password</label>
                      <input type="password" name="password" id="inputPassword" class="form-control">
@@ -86,5 +86,47 @@
         <br />
         
     </div>
+
+<script>
+        $(document).ready(function(){
+
+            $("input#username").focus(function(){
+                $(this).removeClass("field-error");
+            })
+            .blur(function(){
+                if($(this).val() == ""){
+                    $(this).addClass("field-error");
+                }
+            });
+            
+            $("input#inputPassword").focus(function(){
+                $(this).removeClass("field-error");
+            })
+            .blur(function(){
+                if($(this).val() == ""){
+                    $(this).addClass("field-error");
+                }
+            });
+            
+        });
+    
+    function validateForm(){
+            var username = $("input#username").val();
+            var inputPassword = $("input#inputPassword").val();    
+            
+            if(username == "" || inputPassword == ""){
+                
+                if(username == ""){
+                    $("input#username").addClass("field-error");
+                }
+                
+                if(username == ""){
+                    $("input#inputPassword").addClass("field-error");
+                }
+                
+                return false;
+            }
+    }
+</script>
 </body>
 </html>
