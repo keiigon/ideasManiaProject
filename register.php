@@ -258,6 +258,7 @@
             
             $("input#email").val("");
             $("input#email").removeClass("field-error");
+            $("#notValidEmail").hide();
             
             $("select#country").val("");
             $("select#country").removeClass("field-error");
