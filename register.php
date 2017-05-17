@@ -38,9 +38,11 @@
             <div class="col-md-8">
                 <div>
                     <form onsubmit="return validateForm()" class="form-horizontal" role="form" method="post" action="<?php echo $action; ?>" enctype="multipart/form-data">
+                        
                         <div class="form-group">
                             <label for="firstName" class="col-sm-3 control-label">First Name</label>
                             <div class="col-sm-9">
+                                
                                 <input type="text" class="form-control" id="firstName" name="firstName" 
                                        value="<?php echo $user->firstname; ?>">
                             </div>
@@ -57,7 +59,9 @@
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="email" name="email"
                                        value="<?php echo $user->email; ?>">
+                                <div id="notValidEmail" style="color:red">Not valid email format</div>
                             </div>
+                            
                         </div>
                         <div class="form-group">
                             <label for="country" class="col-sm-3 control-label">Country</label>
@@ -119,6 +123,7 @@
                             <div class="col-sm-offset-3 col-sm-9">
                                 <button type="submit" class="btn btn-success">Save</button>
                                 <button type="reset" class="btn btn-default">Clear</button>
+                                
                             </div>
                         </div>
                     </form>
@@ -136,7 +141,46 @@
     </div>
     <script>
         $(document).ready(function(){
+            
+            $("#notValidEmail").hide();
+            
             $("input#firstName").focus(function(){
+                $(this).removeClass("field-error");
+            })
+            .blur(function(){
+                if($(this).val() == ""){
+                    $(this).addClass("field-error");
+                }
+            });
+            
+            $("input#email").focus(function(){
+                $(this).removeClass("field-error");
+            })
+            .blur(function(){
+                if($(this).val() == ""){
+                    $(this).addClass("field-error");
+                }
+            });
+            
+            $("input#username").focus(function(){
+                $(this).removeClass("field-error");
+            })
+            .blur(function(){
+                if($(this).val() == ""){
+                    $(this).addClass("field-error");
+                  }
+            });
+            
+            $("input#password").focus(function(){
+                $(this).removeClass("field-error");
+            })
+            .blur(function(){
+                if($(this).val() == "" && $("input#oldPassword").val() == ""){
+                    $(this).addClass("field-error");
+                  }
+            });
+            
+            $("select#country").focus(function(){
                 $(this).removeClass("field-error");
             })
             .blur(function(){
@@ -146,7 +190,6 @@
             });
         });
         
-        
         function validateForm(){
             var firstName = $("input#firstName").val();
             var email = $("input#email").val();
@@ -155,7 +198,9 @@
             var oldPassword = $("input#oldPassword").val();
             var country = $("select#country").val();
             
-            if(firstName == "" || lastName == "" || email == "" || username == "" || country == "" ||
+            
+            
+            if(firstName == "" || email == "" || username == "" || country == "" ||
                (password == "" && oldPassword == "")){
                 
                 if(firstName == ""){
@@ -170,15 +215,25 @@
                     $("input#username").addClass("field-error");
                 }
                 
-                if(password == ""){
+                if(password == "" && oldPassword == ""){
                     $("input#password").addClass("field-error");
                 }
             
                 if(country == ""){
                     $("select#country").addClass("field-error");
-                }
-            
+                }   
+                
                 return false;
+            }
+            
+            var emailRegx = /^([A-Za-z0-9_\-\.])+\@(([A_Za-z0-9\-])+\.)+([A-Za-z0-9]{2,4})$/;
+            
+            if(!emailRegx.test(email)){
+                $("#notValidEmail").show();
+                return false;
+            }
+            else{
+                $("#notValidEmail").hide();
             }
         }
     </script>
