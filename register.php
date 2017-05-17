@@ -94,8 +94,8 @@
                                     }
                                 ?>
                                 
-                                <input type="radio" name="gender" value="1" <?php echo $male; ?> >Male
-                                <input type="radio" name="gender" value="2" <?php echo $female; ?> >Female
+                                <input type="radio" id="male" name="gender" value="1" <?php echo $male; ?> >Male
+                                <input type="radio" id="female" name="gender" value="2" <?php echo $female; ?> >Female
                             </div>
                         </div>
                         <div class="form-group">
@@ -116,13 +116,13 @@
                             <label for="profilePhoto" class="col-sm-3 control-label">Photo</label>
                             <div class="col-sm-9">
                                 <input type="file" class="form-control" id="profilePhoto" name="profilePhoto">
-                                <input type="hidden" name="oldPhoto" value="<?php echo $user->photo; ?>">
+                                <input type="hidden" id="oldPhoto" name="oldPhoto" value="<?php echo $user->photo; ?>">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
                                 <button type="submit" class="btn btn-success">Save</button>
-                                <button type="reset" class="btn btn-default">Clear</button>
+                                <button type="button" class="btn btn-default" onclick="resetForm()">Clear</button>
                                 
                             </div>
                         </div>
@@ -248,7 +248,33 @@
                 return false;
             }
             
+        }
+        
+        function resetForm(){
+            $("input#firstName").val("");
+            $("input#firstName").removeClass("field-error");
             
+            $("input#lastName").val("");
+            
+            $("input#email").val("");
+            $("input#email").removeClass("field-error");
+            
+            $("select#country").val("");
+            $("select#country").removeClass("field-error");
+            
+            $("input:radio[name=gender]")[0].checked = true;
+            
+            $("input#username").val("");
+            $("input#username").removeClass("field-error");
+            
+            $("input#password").val("");
+            $("input#password").removeClass("field-error");
+            
+            $("input#oldPassword").val("");
+            
+            $("input#profilePhoto").val("");
+            
+            $("input#oldPhoto").val("");
         }
     </script>
 </body>

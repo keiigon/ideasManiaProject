@@ -97,7 +97,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
                                 <button type="submit" class="btn btn-success">Save</button>
-                                <button type="reset" class="btn btn-default" onclick="resetContent()">Clear</button>
+                                <button type="button" class="btn btn-default" onclick="resetContent()">Clear</button>
                             </div>
                         </div>
                     </form>
@@ -184,7 +184,10 @@
                 }
             });
             
-            resetContent();
+            if($("input#content").val() == ""){
+                resetContent();
+            }
+            
         });
         
         
@@ -219,6 +222,13 @@
         function resetContent(){
             $('#summernote').summernote('code', "");
             $("#contentHolder").removeClass("field-error");
+            
+            $("select#category").val("");
+            $("select#category").removeClass("field-error");
+            $("input#title").val("");
+            $("input#title").removeClass("field-error");
+            $("textarea#description").val("");
+            $("textarea#description").removeClass("field-error");
         }
         
     </script>
