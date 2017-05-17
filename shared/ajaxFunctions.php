@@ -29,12 +29,29 @@ function AddComment($ideaId, $userId, $comment){
 }
 
 function AddRate($ideaId, $userId, $rate){
-    $query = "insert into rating (User_Id, Idea_Id, RatingValue)
-              values ($userId, $ideaId, $rate)";
+    $query = "select RatingValue from rating where Idea_Id = $ideaId and User_Id = $userId";
     
     $result = RunQuery($query);
     
-    return $result;
+    $row = mysqli_fetch_array($result);
+    
+    $rating = $row["RatingValue"];
+    
+    if(empty($rating)){
+        $query = "insert into rating (User_Id, Idea_Id, RatingValue)
+                  values ($userId, $ideaId, $rate)";
+    
+        $result = RunQuery($query);
+    
+        return $result;
+    }
+    else{
+        $query = "update rating set RatingValue = $rate where Idea_Id = $ideaId and User_Id = $userId";
+    
+        $result = RunQuery($query);
+    
+        return $result;
+    }
 }
 
 function DeleteIdea($ideaId){

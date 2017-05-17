@@ -21,7 +21,12 @@
            $disableRating = ""; 
         }
         
-        
+        if($rating == 1){
+            $class = "liked";
+        }
+        else{
+            $class = "disLiked";
+        }
     }
 ?>
     <div class="page-title">
@@ -60,6 +65,10 @@
                     <h3>Rate this idea:</h3>
 
                     <input id="input-id" type="number" class="rating" <?php echo $disableRating; ?> value="<?php echo $rating; ?>">
+                    
+                    
+                    <div class="<?php echo $class; ?>" id="likeBtn"></div>
+                    
                 </div>
                 <div class="divider"></div>
 
@@ -134,7 +143,7 @@
                 data:{
                     ideaId: id,
                     userId: user,
-                    rate: rate,
+                    rate: 1,
                     action: action
                     },
                 success: function(msg){
@@ -148,6 +157,44 @@
                 $(this).removeClass("field-error");
              });
             
+            $("#likeBtn").click(function(){
+
+                if($(this).hasClass("disLiked")){
+                    //$(this).removeClass("disLiked").addClass("liked");
+                    var action = "AddRate";
+                    
+                    $.ajax({
+                        type:"POST",
+                        url:"shared/ajaxFunctions.php",
+                        data:{
+                            ideaId: id,
+                            userId: user,
+                            rate: 1,
+                            action: action
+                            },
+                        success: function(msg){
+                                location.reload();
+                            }
+                    });
+                }
+                else{
+                    //$(this).removeClass("liked").addClass("disLiked");
+                    
+                    $.ajax({
+                        type:"POST",
+                        url:"shared/ajaxFunctions.php",
+                        data:{
+                            ideaId: id,
+                            userId: user,
+                            rate: 0,
+                            action: action
+                            },
+                        success: function(msg){
+                                location.reload();
+                            }
+                    });
+                }
+             });
         });
         
         function addComment(){

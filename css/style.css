@@ -437,3 +437,24 @@ h1, h2, h3, h4, h5, h6 {
 .panel{
     margin-bottom:0;
 }
+
+.disLiked{
+    background: url(../img/likeGray.png) no-repeat;
+    width: 100px;
+    height: 105px;
+    cursor: pointer;
+}
+
+#likeBtn:hover{
+    background: url(../img/likeColored.png) no-repeat;
+    width: 100px;
+    height: 105px;
+    cursor: pointer;
+}
+
+.liked{
+    background: url(../img/likeColored.png) no-repeat;
+    width: 100px;
+    height: 105px;
+    cursor: pointer;
+}
