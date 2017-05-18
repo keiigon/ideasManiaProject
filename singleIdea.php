@@ -48,10 +48,25 @@
         <!-- Content -->
         <div class="row">
             <div class="col-md-8">
-                <div>
-                    <h3>Posted at: <?php echo date("d-m-Y", strtotime($idea->postDate)) ?></h3>
-                    <h3>By: <?php echo $idea->username ?></h3>
-                    <h3>Category: <?php echo $idea->category ?></h3>
+                <div class="row">
+                    <div class="col-md-9">
+                        <h3>Posted at: <?php echo date("d-m-Y", strtotime($idea->postDate)) ?></h3>
+                        <div style="height: 10px"></div>
+                        <h3>By: <?php echo $idea->username ?></h3>
+                        <div style="height: 10px"></div>
+                        <h3>Category: <?php echo $idea->category ?></h3>
+                    </div>
+                    <div class="col-md-3">
+                        <?php
+                            if(isset($_SESSION["userId"])){
+                        ?>
+                            <div class="<?php echo $class; ?>" id="likeBtn">
+                                <span id="likedNumberBox"></span>
+                            </div>
+                         <?php
+                        }
+                        ?>
+                    </div>
                 </div>
                 <br />
                 <div>
@@ -62,15 +77,9 @@
                     if(isset($_SESSION["userId"])){
                 ?>
                 <div>
-                    <h3>Rate this idea:</h3>
 
-                    <input id="input-id" type="number" class="rating" <?php echo $disableRating; ?> value="<?php echo $rating; ?>">
-                    
-                    
-                    <div class="<?php echo $class; ?>" id="likeBtn"></div>
-                    
+                        
                 </div>
-                <div class="divider"></div>
 
                 <div class="title">
                     <h2>Leave Comment</h2>
@@ -133,36 +142,20 @@
         <?php echo 'var user = ' . json_encode($_SESSION["userId"]) . ';' ?>
         
         $(document).ready(function(){
-            $('#input-id').rating().on("rating.change", function(event, value, caption){
-                var rate = value;
-                var action = "AddRate";
-                
-                $.ajax({
-                type:"POST",
-                url:"shared/ajaxFunctions.php",
-                data:{
-                    ideaId: id,
-                    userId: user,
-                    rate: 1,
-                    action: action
-                    },
-                success: function(msg){
-                        location.reload();
-                    }
-                });
-            });
             
+            totalLikes(id);
             
              $("textarea#comment").focus(function(){
                 $(this).removeClass("field-error");
              });
             
             $("#likeBtn").click(function(){
+                
+                var action = "AddRate";
 
                 if($(this).hasClass("disLiked")){
                     //$(this).removeClass("disLiked").addClass("liked");
-                    var action = "AddRate";
-                    
+
                     $.ajax({
                         type:"POST",
                         url:"shared/ajaxFunctions.php",
@@ -173,7 +166,9 @@
                             action: action
                             },
                         success: function(msg){
-                                location.reload();
+                                //location.reload();
+                                $("#likeBtn").removeClass("disLiked").addClass("liked");
+                            totalLikes(id);
                             }
                     });
                 }
@@ -190,12 +185,33 @@
                             action: action
                             },
                         success: function(msg){
-                                location.reload();
+                                //location.reload();
+                                $("#likeBtn").removeClass("liked").addClass("disLiked");
+                                totalLikes(id);
                             }
                     });
                 }
              });
+            
+            
         });
+        
+        function totalLikes(ideaId){
+            var action = "GetTotalLikes";
+            
+            $.ajax({
+                type:"POST",
+                url:"shared/ajaxFunctions.php",
+                data:{
+                    ideaId: ideaId,
+                    action: action
+                },
+                success: function(response){
+                    var rating = response == "" ? 0 : response;
+                    $("#likedNumberBox").text(rating);
+                }
+            });
+        }
         
         function addComment(){
             var ideaId = id;

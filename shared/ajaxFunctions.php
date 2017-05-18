@@ -11,8 +11,11 @@
                 AddRate($_POST["ideaId"], $_POST["userId"], $_POST["rate"]);
                 break;
             case "DeleteIdea":
-            DeleteIdea($_POST["ideaId"]);
-            break;
+                DeleteIdea($_POST["ideaId"]);
+                break;
+            case "GetTotalLikes":
+                GetTotalLikes($_POST["ideaId"]);
+                break;
             default:
         }
     }
@@ -37,7 +40,7 @@ function AddRate($ideaId, $userId, $rate){
     
     $rating = $row["RatingValue"];
     
-    if(empty($rating)){
+    if($rating == ""){
         $query = "insert into rating (User_Id, Idea_Id, RatingValue)
                   values ($userId, $ideaId, $rate)";
     
@@ -60,6 +63,18 @@ function DeleteIdea($ideaId){
     $result = RunQuery($query);
     
     return $result;
+}
+
+function GetTotalLikes($ideaId){
+    $query = "select sum(RatingValue) as totalRating from rating where Idea_Id = $ideaId group by Idea_Id";
+    
+    $result = RunQuery($query);
+    
+    $row = mysqli_fetch_array($result);
+    
+    $rating = $row["totalRating"];
+    
+    echo $rating;
 }
 
 ?>

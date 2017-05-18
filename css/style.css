@@ -443,6 +443,12 @@ h1, h2, h3, h4, h5, h6 {
     width: 100px;
     height: 105px;
     cursor: pointer;
+    text-align: center;
+}
+
+#likeBtn{
+     width: 100px;
+    margin: 0px auto;
 }
 
 #likeBtn:hover{
@@ -450,6 +456,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 100px;
     height: 105px;
     cursor: pointer;
+    text-align: center;
 }
 
 .liked{
@@ -457,4 +464,16 @@ h1, h2, h3, h4, h5, h6 {
     width: 100px;
     height: 105px;
     cursor: pointer;
+    text-align: center;
 }
+
+#likedNumberBox{
+    color: white;
+    font-size: 22px;
+    padding-top: 55px;
+    display: inline-block;
+    text-align: center;
+    padding-left: 20px;
+    font-family: "Boogaloo" !important;
+}
+
