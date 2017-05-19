@@ -426,7 +426,7 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 100;
 }
 
-.btn_delete{
+.btn_delete, .btn_edit{
     cursor: pointer;
 }
 
@@ -475,5 +475,16 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     padding-left: 20px;
     font-family: "Boogaloo" !important;
+}
+
+.green-separator{
+    height: 2px;
+    background-color: #0acb2d;;
+    margin: 15px 0;
+        
+}
+
+.likedIdeas h3 a{
+    color: #0acb2d;
 }
 

@@ -117,11 +117,12 @@ function UpdateUserProfile($firstname, $lastname, $username, $password, $email, 
 }
 
 function GetUserIdeas($userId){
-    $query = "select i.Idea_Id, i.Title, i.Date, c.Title as category from ideas as i 
-              inner join category as c 
-              on i.Category_Id = c.Category_Id
-              where i.User_Id = $userId
-              order by i.Date desc";
+    $query = "select i.Idea_Id, i.Title, i.Date, c.Title as category, 
+             (select sum(r.RatingValue) from rating as r inner join ideas as d on r.Idea_Id = d.Idea_Id where d.Idea_Id = i.Idea_Id group  by r.Idea_Id) as rating from ideas as i 
+             inner join category as c 
+             on i.Category_Id = c.Category_Id
+             where i.User_Id = $userId
+             order by i.Date desc";
     
     $result = RunQuery($query);
     
@@ -134,6 +135,7 @@ function GetUserIdeas($userId){
         $idea->title = $row["Title"];
         $idea->category = $row["category"];
         $idea->postDate = $row["Date"];
+        $idea->rating = $row["rating"];
         
         array_push($ideasList, $idea);
     }
@@ -248,26 +250,6 @@ function GetIdeaComments($ideaId){
     return $commentsList;
 }
 
-function AddComment($ideaId, $userId, $comment){
-    $currentDate = date('Y-m-d');
-    
-    $query = "insert into comments (Comment, User_Id, Idea_Id, Date)
-              values ('$comment', $userId, $ideaId, '$currentDate')";
-    
-    $result = RunQuery($query);
-    
-    return $result;
-}
-
-function AddRate($ideaId, $userId, $rate){
-    $query = "insert into rating (User_Id, Idea_Id, RatingValue)
-              values ($userId, $ideaId, $rate)";
-    
-    $result = RunQuery($query);
-    
-    return $result;
-}
-
 function CheckUserRating($ideaId, $userId){
     $query = "select RatingValue from rating where Idea_Id = $ideaId and User_Id = $userId";
     
@@ -284,6 +266,31 @@ function UpdateIdea($title, $description, $categoryId, $content, $ideaId){
     $result = RunQuery($query);
     
     return $result;
+}
+
+function GetMostLikedIdeas(){
+
+    $query = "select i.Idea_Id, i.Title, sum(r.RatingValue) as rating from ideas as i 
+              inner join rating as r 
+              on i.Idea_Id = r.Idea_Id
+              group by i.Idea_Id
+              order by rating desc, i.Date desc limit 4";
+    
+    $result = RunQuery($query);
+    
+    $ideasList = array();
+    
+    while ($row = mysqli_fetch_array($result))
+    {
+        $idea = (object)array();
+        $idea->ideaId = $row["Idea_Id"];
+        $idea->title = $row["Title"];
+        $idea->rating = $row["rating"];
+        
+        array_push($ideasList, $idea);
+    }
+    
+    return $ideasList;
 }
 
 

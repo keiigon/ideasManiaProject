@@ -5,28 +5,37 @@
         $ideaId = $_GET["id"];
         
         $idea = GetIdeaById($ideaId);
-        $commentsList = GetIdeaComments($ideaId);
-        if(isset($_SESSION["userId"])){
-            $rating = CheckUserRating($ideaId, $_SESSION["userId"]);
-            if(empty($rating)){
-                $rating = 0;
-                $disableRating = "";
+        
+        $class = "";
+        
+        if(empty($idea->ideaId)){
+            header("refresh:0;index.php");
+        }
+        else{
+            $commentsList = GetIdeaComments($ideaId);
+            if(isset($_SESSION["userId"])){
+                $rating = CheckUserRating($ideaId, $_SESSION["userId"]);
+                if(empty($rating)){
+                    $rating = 0;
+                    $disableRating = "";
+                }
+                else{
+                    $disableRating = "disabled";
+                }
             }
             else{
-                $disableRating = "disabled";
+               $rating = 0;
+               $disableRating = ""; 
             }
-        }
-        else{
-           $rating = 0;
-           $disableRating = ""; 
+
+            if($rating == 1){
+                $class = "liked";
+            }
+            else{
+                $class = "disLiked";
+            }  
         }
         
-        if($rating == 1){
-            $class = "liked";
-        }
-        else{
-            $class = "disLiked";
-        }
     }
 ?>
     <div class="page-title">
@@ -140,9 +149,10 @@
         id = id.split('=')[1];
         
         <?php echo 'var user = ' . json_encode($_SESSION["userId"]) . ';' ?>
+            
         
         $(document).ready(function(){
-            
+
             totalLikes(id);
             
              $("textarea#comment").focus(function(){
@@ -168,7 +178,7 @@
                         success: function(msg){
                                 //location.reload();
                                 $("#likeBtn").removeClass("disLiked").addClass("liked");
-                            totalLikes(id);
+                                totalLikes(id);
                             }
                     });
                 }

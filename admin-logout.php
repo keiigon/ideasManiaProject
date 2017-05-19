@@ -1,4 +1,4 @@
-<?php include("shared/header.php"); ?>
+<?php include("shared/admin-header.php"); ?>
     <div class="page-title">
 
         <div class="page-title-inner">
@@ -20,15 +20,15 @@
     <div class="container marketing">
         
         <?php
-            unset($_SESSION["userId"]);
+            unset($_SESSION["adminId"]);
             
-            if(isset($_COOKIE["user"])){
-                setcookie("user", "", time() - 3600, "/");
+            if(isset($_COOKIE["admin"])){
+                setcookie("admin", "", time() - 3600, "/");
             }
         
             echo "<h1 style='color:green; text-align: center;'>you logged out Sucessfully</a></h1>";
         
-            header("refresh:1;index.php");
+            header("refresh:1;admin-login.php");
         ?>
         
         

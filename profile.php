@@ -42,7 +42,7 @@
                             <th>Title</th>
                             <th>Date</th>
                             <th>Category</th>
-                            <th>Rating</th>
+                            <th>Likes</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -59,7 +59,7 @@
                                 </td>
                                 <td><?php echo date("d-m-Y", strtotime($idea->postDate)); ?></td>
                                 <td><?php echo $idea->category; ?></td>
-                                <td></td>
+                                <td><?php echo $idea->rating; ?></td>
                                 <td><a href="addIdea.php?id=<?php echo $idea->ideaId ?>">Edit</a></td>
                                 <td><a class="btn_delete" title="<?php echo $idea->ideaId ?>">Delete</a></td>
                             </tr>

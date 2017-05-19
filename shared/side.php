@@ -1,3 +1,7 @@
+
+<?php
+    $likedIdeas = GetMostLikedIdeas();
+?>
 <?php
     if(!isset($_SESSION["userId"])){
  ?>
@@ -14,39 +18,14 @@
 
                 <div>
                     <div class="title">
-                        <h2>Idea of the month</h2>
+                        <h2>Most liked ideas</h2>
                     </div>
-                    <div class="progress-box">
-                        <h4><a href="singleIdea.html">Idea 1 (70 %)</a></h4>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                 aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                            </div>
+                    <br />
+                    <?php foreach($likedIdeas as $l){ ?>
+                        <div class="likedIdeas">
+                            <h3><a href="singleIdea.php?id=<?php echo $l->ideaId ?>" ><?php echo $l->title ?></a> (<?php echo $l->rating ?>) <img src="img/likeColored.png" width="25px" /></h3>
                         </div>
-                    </div>
-                    <div class="progress-box">
-                        <h4><a href="singleIdea.html">Idea 2 (50 %)</a></h4>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                 aria-valuemin="0" aria-valuemax="100" style="width:50%">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="progress-box">
-                        <h4><a href="singleIdea.html">Idea 3 (30 %)</a></h4>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                 aria-valuemin="0" aria-valuemax="100" style="width:30%">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="progress-box">
-                        <h4><a href="singleIdea.html">Idea 4 (10 %)</a></h4>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                 aria-valuemin="0" aria-valuemax="100" style="width:10%">
-                            </div>
-                        </div>
-                    </div>
+                        <div class="green-separator"></div>
+                    <?php } ?>
                    
                 </div>

@@ -1,4 +1,5 @@
 <?php include("shared/header.php") ?>
+<?php include("shared/functions.php") ?>
     <div class="page-title">
 
         <div class="page-title-inner">
